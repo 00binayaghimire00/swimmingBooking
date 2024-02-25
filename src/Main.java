@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to Hatfield Junior Swimming School");
         swimmingStart();
-        Data data = new Data();
-        System.out.println(data.studentData);
+        ArrayList<Object> data = Data.getStudentData();
+        System.out.println(data);
     }
 
     public static void swimmingStart(){
@@ -23,7 +24,7 @@ public class Main {
         Student student = new Student();
         Coach   coach = new Coach();
         try{
-            if(chooseNumber>=1 || chooseNumber<8 ){
+            if(chooseNumber>=1 && chooseNumber<8 ){
                 if(chooseNumber == 1){
                     student.bookingClasses();
                 } else if (chooseNumber == 2) {
@@ -45,7 +46,7 @@ public class Main {
             }
         }
         catch (Exception e) {
-            System.out.println("Invalid Input..");
+            System.err.println("Invalid Input..");
             swimmingStart();
         }
     }

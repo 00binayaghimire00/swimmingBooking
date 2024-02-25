@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Student extends User{
     private int grade;
@@ -82,7 +82,7 @@ public class Student extends User{
                     Main.swimmingStart();
                 }
             }
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Invalid Input...");
             bookingClasses();
         }
@@ -143,14 +143,48 @@ public class Student extends User{
         System.out.println("Welcome! Please fill the form below");
         System.out.println("Please Enter your name: ");
         String name = read.next();
-        System.out.println("Please Enter your age: ");
-        int age = read.nextInt();
-        System.out.println("Please Enter your phone number: ");
-        String phoneNumber = read.next();
+        int age = checkAge();
+        String phoneNumber = checkPhoneNumber();
         System.out.println("Please Enter your gender: ");
         String gender = read.next();
         System.out.println("Please Enter your grade: ");
         int grade = read.nextInt();
+        Data data = new Data();
+        data.createStudent(name, age, phoneNumber, gender, grade);
 
+    }
+
+    public int checkAge(){
+        System.out.println("Please Enter your age: ");
+        int age = read.nextInt();
+        try {
+            if (age >= 4 && age <= 11) {
+                return age;
+            } else {
+                System.out.println("Your age must be between 4 and 11");
+                checkAge();
+            }
+        } catch (InputMismatchException e) {
+            System.err.println("Invalid Input...");
+            checkAge();
+        }
+        return age;
+    }
+
+    public String checkPhoneNumber(){
+        System.out.println("Please Enter your phone number: ");
+        String phoneNumber = read.next();
+        try{
+            if(phoneNumber.length() == 10){
+                return phoneNumber;
+            }else{
+                System.out.println("Your phone number must be 10 digits");
+                checkPhoneNumber();
+            }
+        }catch (InputMismatchException e){
+            System.err.println("Invalid Input...");
+            checkPhoneNumber();
+        }
+        return phoneNumber;
     }
 }
