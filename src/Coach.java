@@ -5,12 +5,21 @@ public class Coach {
 
     public Coach(){}
 
-    static ArrayList<Object> studentData = new ArrayList<>(Arrays.asList(
-            new ArrayList<>(Arrays.asList("Michael", 32, "07900567890", "M", 3)),
-            new ArrayList<>(Arrays.asList("Sophie", 25, "07600678901", "F", 4)),
-            new ArrayList<>(Arrays.asList("Benjamin", 28, "07400789012", "M", 3)),
-            new ArrayList<>(Arrays.asList("Jessica", 30, "07700890123", "F", 4))
+    static ArrayList<Object> coachData = new ArrayList<>(Arrays.asList(
+            new ArrayList<>(Arrays.asList("Michael", 47 , 6, 7.83)),
+            new ArrayList<>(Arrays.asList("Sophie", 47 , 6, 7.8)),
+            new ArrayList<>(Arrays.asList("Benjamin", 47 , 6, 7.8)),
+            new ArrayList<>(Arrays.asList("Jessica", 47 , 6, 7.8))
     ));
+
+    public static ArrayList<Object> getCoachData() {
+        return coachData;
+    }
+
+    public static void setCoachData(ArrayList<Object> coachData) {
+        Coach.coachData = coachData;
+    }
+
     public void coachMonthlyReport(){
 
     }
