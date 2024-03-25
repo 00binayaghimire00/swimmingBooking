@@ -10,7 +10,7 @@ public class Booking {
     static ArrayList<Object> bookingData = new ArrayList<>(Arrays.asList(
             new ArrayList<>(Arrays.asList("M1APR45P", "MON", 1, "APR", 4, "Halen", 3)),
             new ArrayList<>(Arrays.asList("M1APR56P", "MON", 1, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M1APR67P", "MON", 1, "APR", 6, "Halen", 3)),
+            new ArrayList<>(Arrays.asList("M1APR67P", "MON", 1, "APR", 6, "Halen", 2)),
             new ArrayList<>(Arrays.asList("W3APR45P", "WED", 3, "APR", 4, "Halen", 3)),
             new ArrayList<>(Arrays.asList("W3APR56P", "WED", 3, "APR", 5, "Halen", 3)),
             new ArrayList<>(Arrays.asList("W3APR67P", "WED", 3, "APR", 6, "Halen", 3)),
@@ -23,14 +23,14 @@ public class Booking {
             new ArrayList<>(Arrays.asList("M8APR56P", "MON", 8, "APR", 5, "Halen", 3)),
             new ArrayList<>(Arrays.asList("M8APR67P", "MON", 8, "APR", 6, "Halen", 3)),
             new ArrayList<>(Arrays.asList("W10APR45P", "WED", 10, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W10APR56P", "WED", 10, "APR", 5, "Halen", 3)),
+            new ArrayList<>(Arrays.asList("W10APR56P", "WED", 10, "APR", 5, "Halen", 4)),
             new ArrayList<>(Arrays.asList("W10APR67P", "WED", 10, "APR", 6, "Halen", 3)),
             new ArrayList<>(Arrays.asList("F12APR45P", "FRI", 12, "APR", 4, "Halen", 3)),
             new ArrayList<>(Arrays.asList("F12APR56P", "FRI", 12, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F12APR67P", "FRI", 12, "APR", 6, "Halen", 3)),
+            new ArrayList<>(Arrays.asList("F12APR67P", "FRI", 12, "APR", 6, "Halen", 5)),
             new ArrayList<>(Arrays.asList("S13APR36P", "SAT", 13, "APR", 2, "Halen", 3)),
             new ArrayList<>(Arrays.asList("S13APR36P", "SAT", 13, "APR", 3, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M15APR45P", "MON", 15, "APR", 4, "Halen", 3)),
+            new ArrayList<>(Arrays.asList("M15APR45P", "MON", 15, "APR", 4, "Halen", 1)),
             new ArrayList<>(Arrays.asList("M15APR56P", "MON", 15, "APR", 5, "Halen", 3)),
             new ArrayList<>(Arrays.asList("M15APR67P", "MON", 15, "APR", 6, "Halen", 3)),
             new ArrayList<>(Arrays.asList("W17APR45P", "WED", 17, "APR", 4, "Halen", 3)),
@@ -127,7 +127,7 @@ public class Booking {
     static ArrayList<Object> bookedDate = new ArrayList<>();
 
     // array list have id, day, date, month, time, coach, grade, participants, rating, review
-    static void bookedData(String BID, String Day, String Date, int Month, int Time, String Coach, int Grade, int Participants, int Rating, int Review) {
+    static void bookedData(String BID, String Day, String Date, int Month, int Time, String Coach, int Grade, int Participants, int Rating, int Review, String review) {
         ArrayList<Object> data = new ArrayList<>();
         data.add(BID);
         data.add(Day);

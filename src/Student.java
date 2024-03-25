@@ -11,19 +11,13 @@ public class Student extends User {
     static ArrayList<ArrayList<Object>> lessonDisplay = new ArrayList<>();
     Scanner read = new Scanner(System.in);
 
-    public Student(String name, String uid, int grade) {
-        Main.Name = name;
-        Main.Uid = uid;
-        Main.Grade = grade;
-
-    }
-
     public void bookingClasses() {
+
         System.out.println("\n\nPlease choose how you want to display the lessons:");
         System.out.println("\t1. By Day \n\t2. By Coach Name \n\t3. By Grade");
         int lessonDisplayOptions = read.nextInt();
-        if ( lessonDisplayOptions >0 && (lessonDisplayOptions < 4)){
-            switch (lessonDisplayOptions){
+        if (lessonDisplayOptions > 0 && (lessonDisplayOptions < 4)) {
+            switch (lessonDisplayOptions) {
                 case 1:
                     System.out.println("Enter Day : eg MON for Monday");
                     String optionDay = read.next().toUpperCase();
@@ -39,9 +33,9 @@ public class Student extends User {
                             lessonDisplay(Day, Date, Month, Time, Coach, Grade);
                         }
                     }
-                    if (lessonDisplay.isEmpty()){
-                        System.out.println("There is no available lessons on "+ optionDay+"-DAY");
-                    }else {
+                    if (lessonDisplay.isEmpty()) {
+                        System.out.println("There is no available lessons on " + optionDay + "-DAY");
+                    } else {
                         lessonPrint();
                     }
                     break;
@@ -61,9 +55,9 @@ public class Student extends User {
                             lessonDisplay(Day, Date, Month, Time, Coach, Grade);
                         }
                     }
-                    if (lessonDisplay.isEmpty()){
-                        System.out.println("There is no available lessons on "+ optionCoach+" Coach");
-                    }else {
+                    if (lessonDisplay.isEmpty()) {
+                        System.out.println("There is no available lessons on " + optionCoach + " Coach");
+                    } else {
                         lessonPrint();
                     }
                     break;
@@ -82,14 +76,14 @@ public class Student extends User {
                             lessonDisplay(Day, Date, Month, Time, Coach, Grade);
                         }
                     }
-                    if (lessonDisplay.isEmpty()){
-                        System.out.println("There is no available lessons on Grade "+ optionGrade);
-                    }else {
+                    if (lessonDisplay.isEmpty()) {
+                        System.out.println("There is no available lessons on Grade " + optionGrade);
+                    } else {
                         lessonPrint();
                     }
                     break;
             }
-        }else{
+        } else {
             System.out.println("\n\nPlease enter valid option");
             System.out.println("\n\t1. By Day \n\t2. By Coach Name \n\t3. By Grade");
             lessonDisplayOptions = read.nextInt();
@@ -100,10 +94,49 @@ public class Student extends User {
         String Uid = Main.Uid;
         System.out.println("Day: eg MON for Monday");
         String chosenDay = read.next().toUpperCase();
+        boolean validDay = false;
+        for (Object bookingArray : bookingData) {
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            String bookingDay = (String) bookingInfo.get(1);
+            if (chosenDay.equals(bookingDay)) {
+                validDay = true;
+                break;
+            }
+        }
+        if (!validDay) {
+            System.out.println("Invalid day. Please enter a valid day.");
+            chosenDay = read.next().toUpperCase();
+        }
         System.out.println("Month: eg APR for April");
         String chosenMonth = read.next().toUpperCase();
+        boolean validMonth = false;
+        for (Object bookingArray : bookingData) {
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            String bookingDay = (String) bookingInfo.get(2);
+            if (chosenDay.equals(bookingDay)) {
+                validMonth = true;
+                break;
+            }
+        }
+        if (!validMonth) {
+            System.out.println("Invalid Month. Please enter a valid Month.");
+            chosenMonth = read.next().toUpperCase();
+        }
         System.out.println("Date:");
         int chosenDate = read.nextInt();
+        boolean validDate = false;
+        for (Object bookingArray : bookingData) {
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            int bookingDate = (int) bookingInfo.get(3);
+            if (chosenDate == bookingDate) {
+                validDate = true;
+                break;
+            }
+        }
+        if (!validDate) {
+            System.out.println("Invalid Date. Please enter a valid day.");
+            chosenDate = read.nextInt();
+        }
         System.out.println("Time:");
         int chosenTime = read.nextInt();
         System.out.println("Coach Name: eg Halen");
@@ -121,7 +154,12 @@ public class Student extends User {
             int bookingTime = (int) bookingInfo.get(4);
             String bookingCoach = ((String) bookingInfo.get(5)).toUpperCase();
             int bookingGrade = (int) bookingInfo.get(6);
-
+            /**
+             * yo if lai loop gardai check garna parxa hai
+             * make this nested if else. Like just check when user enter the day.
+             * if correct the only inside else asking again for valid day.
+             * When user give valid day then check date then month then remaining other.
+             */
             if (chosenDay.equals(bookingDay) && chosenMonth.equals(bookingMonth) &&
                     chosenDate == bookingDate && chosenTime == bookingTime &&
                     chosenCoach.equals(bookingCoach) && chosenGrade == bookingGrade) {
@@ -131,16 +169,10 @@ public class Student extends User {
                 String review = "No Rating";
                 // Storing data from bookingData Array to BookedData Array
                 Booking.bookedData(bookingId, chosenDay, chosenMonth, chosenDate, chosenTime,
-                        chosenCoach, chosenGrade, participants, cancelled, rating);
+                        chosenCoach, chosenGrade, participants, cancelled, rating, review);
             }
         }
-
-        System.out.println(Booking.bookedDate); // Debug print to check if bookedDate is updated
-        //System.out.println("Your booking has been placed for "+Day+" "+Date+" "+Month+" ("+Time+"-"+(Time+1)+" PM)");
-        System.out.println("Your booking has been placed.\nReturning back to home menu.\nPlease wait...");
-        Swimming.swimmingBookingStart();
-        }
-
+    }
 
     public void bookingChanges() {
         Scanner read = new Scanner(System.in);
@@ -276,7 +308,53 @@ public class Student extends User {
         }
     }
 
+    public void checkingUser() {
+        System.out.println("Are you existing User. Type 'Y' for Yes and 'N' for No.");
+        String checkOption = read.next().toUpperCase();
+        if (checkOption.equals("Y")){
+            System.out.println("Please Enter your Name");
+            String checkName = read.next().toUpperCase();
+            boolean validName = false;
+            while (!validName) {
+                for (Object arrayName : Data.studentData) {
+                    ArrayList<Object> studentInfo = (ArrayList<Object>) arrayName;
+                    String name = ((String) studentInfo.get(1)).toUpperCase();
+                    if (name.equals(checkName)) {
+                        validName = true;
+                        Main.Name = ((String) studentInfo.get(1)).toUpperCase();
+                        Main.Uid = (String) studentInfo.get(0);
+                        Main.Grade = (int) studentInfo.get(5);
+                        break;
+                    }
+                }
+                if (!validName) {
+                    System.out.println("\nInvalid name...");
+                    System.out.println("Please enter your name again: ");
+                    checkName = read.next().toUpperCase();
+                }
+            }
 
+        }else if (checkOption.equals("N")){
+            System.out.println("Do you with to register or exit the system");
+            System.out.println("1. Add as New User. \n2. Exit");
+            int checkingToAddUser = read.nextInt();
+            switch (checkingToAddUser){
+                case 1:
+                    registerLerner();
+                    break;
+                case 2:
+                    Swimming.exit();
+                    break;
+                default:
+                    System.out.println("Invalid Input.\nPlease choose the right option");
+                    checkingToAddUser = read.nextInt();
+                    break;
+            }
+        }else{
+            System.out.println("Invalid Input.\nPlease choose the right option");
+            checkOption = read.next().toUpperCase();
+        }
+    }
 }
 
 
