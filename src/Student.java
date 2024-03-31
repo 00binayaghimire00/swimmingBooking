@@ -3,7 +3,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Student {
-    private int grade;
     ArrayList<Object> studentData = Data.getStudentData();
     ArrayList<Object> bookingData = Booking.getBookingData();
     ArrayList<Object> bookedData = Booking.getBookedDate();
@@ -97,6 +96,7 @@ public class Student {
         }
         // array list have id, day, date, month, time, coach, grade, participants, rating, review
         String Uid = Main.Uid;
+
         System.out.println("Please enter the lesson avaiable lesson booking ID");
         String choosenBookingID = read.next().toUpperCase();
 
@@ -112,18 +112,22 @@ public class Student {
             String bookingCoach = ((String) bookingInfo.get(5)).toUpperCase();
             int bookingGrade = (int) bookingInfo.get(6);
             int bookingParticipants = (int) bookingInfo.get(7);
-
-            if (choosenBookingID.equals(bookingID)) {
-                Booking.makeBooking(bookingID, bookingParticipants);
-                bookingInfo.set(7, bookingParticipants+1);
-                int cancelled = 0;
-                int rating = 0;
-                String review = "No Rating";
-                // Storing data from bookingData Array to BookedData Array
-                Booking.bookedData(bookingID, bookingDay, bookingDate, bookingMonth, bookingTime,
-                        bookingCoach, bookingGrade, bookingParticipants, cancelled, rating, review);
-                System.out.println("Booking conformed!!");
-                System.out.println("You have lesson on "+bookingMonth+" "+bookingDay+" from "+bookingTime+" to "+(bookingTime+1));
+            if (Main.Grade == bookingGrade || Main.Grade + 1 == bookingGrade) {
+                if (choosenBookingID.equals(bookingID)) {
+                    Booking.makeBooking(bookingID, bookingParticipants);
+                    bookingInfo.set(7, bookingParticipants+1);
+                    int cancelled = 0;
+                    int rating = 0;
+                    String review = "No Rating";
+                    // Storing data from bookingData Array to BookedData Array
+                    Booking.bookedData(bookingID, bookingDay, bookingDate, bookingMonth, bookingTime,
+                            bookingCoach, bookingGrade, bookingParticipants, cancelled, rating, review);
+                    System.out.println("Booking conformed!!");
+                    System.out.println("You have lesson on "+bookingMonth+" "+bookingDay+" from "+bookingTime+" to "+(bookingTime+1));
+                }
+            } else {
+                System.out.println("You cannot book this lesson. Your grade level doesn't match the course.");
+                choosenBookingID = read.next();
             }
         }
     }
@@ -141,27 +145,9 @@ public class Student {
             String Coach = (String) bookingInfo.get(5);
             int Grade = (int) bookingInfo.get(6);
             int Participants = (int) bookingInfo.get(7);
-            lessonDisplay(BID ,Day, Date, Month, Time, Coach, Grade, Participants);
+            lessonDisplay(BID, Day, Date, Month, Time, Coach, Grade, Participants);
         }
-        boolean validBookingID = false;
-        String chosenBookingID = "";
-        // Loop until a valid booking ID is provided
-        while (!validBookingID) {
-            System.out.println("Please enter the booking ID");
-            chosenBookingID = read.next().toUpperCase();
-            // Check if the chosen booking ID exists in the booked data
-            for (Object bookingArray : bookedData) {
-                ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
-                String bookingID = (String) bookingInfo.get(0);
-                if (chosenBookingID.equals(bookingID)) {
-                    validBookingID = true;
-                    break;
-                }
-            }
-            if (!validBookingID) {
-                System.out.println("Invalid booking ID. Please enter a valid one.");
-            }
-        }
+        bookingIDCheck();
         for (Object bookingArray : bookedData){
             ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
             String bookingID = (String) bookingInfo.get(0);
@@ -191,22 +177,64 @@ public class Student {
     }
 
     public void attendSwimming() {
-        System.out.println("Wait till your class completes");
-        try {
-            Thread.sleep(2000);
-            System.out.println("You have completed the class");
-
-            System.out.println("Returning back to home");
-            Thread.sleep(2000);
-            Swimming.swimmingBookingStart();
-        } catch (InterruptedException e) {
-            System.out.println("You inturrupted the class\n" + "Please try again!!");
-            attendSwimming();
+        Scanner read = new Scanner(System.in);
+        for (Object bookingArray : Booking.bookedDate) {
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            String Day = ((String) bookingInfo.get(1)).toUpperCase();
+            String BID = (String) bookingInfo.get(0);
+            Day = (String) bookingInfo.get(1);
+            int Date = (int) bookingInfo.get(2);
+            String Month = ((String) bookingInfo.get(3));
+            int Time = (int) bookingInfo.get(4);
+            String Coach = (String) bookingInfo.get(5);
+            int Grade = (int) bookingInfo.get(6);
+            int Participants = (int) bookingInfo.get(7);
+            lessonDisplay(BID ,Day, Date, Month, Time, Coach, Grade, Participants);
+        }
+        bookingIDCheck();
+        for (Object bookingArray : bookedData){
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            String bookingID = (String) bookingInfo.get(0);
+            String Day = (String) bookingInfo.get(1);
+            int Date = (int) bookingInfo.get(2);
+            String Month = ((String) bookingInfo.get(3));
+            int Time = (int) bookingInfo.get(4);
+            String Coach = (String) bookingInfo.get(5);
+            int Grade = (int) bookingInfo.get(6);
+            int Participants = (int) bookingInfo.get(7);
+            if (Booking.userLessonRecord.containsKey(bookingID)) {
+                Booking.addAttendanceRecord(Month);
+                System.out.println("Please give rating on this lesson out of 10");
+                int Rating = read.nextInt();
+                if(Rating < 11 ) {
+                    System.out.println("Please write review on this lesson");
+                    String Review = read.nextLine();
+                    Booking.addOnOldBookingData(bookingID, Day, Date, Month, Time, Coach, Grade, Participants,Rating, Review);
+                    if (Main.Grade <= 5) {
+                        Main.Grade += 1;
+                    }
+                }else{
+                    System.out.println("your review is more than 10\nPlease try again");
+                    Rating = read.nextInt();
+                }
+            }
         }
     }
 
     public void lernerMonthlyReport() {
-
+        Scanner read = new Scanner(System.in);
+        System.out.println("Please select following for report");
+        System.out.println("\t1. Report of Learner.\t2.Report of Coach");
+        int choosenOptions = read.nextInt();
+        switch (choosenOptions){
+            case 1:
+                System.out.println("Report of Learner");
+            case 2:
+                System.out.println("Report of Coach");
+            default:
+                System.out.println("Invalid Input...\nPlease enter options again");
+                choosenOptions = read.nextInt();
+        }
     }
 
     public void registerLerner() {
@@ -344,40 +372,27 @@ public class Student {
         }
     }
 
-    public void validateLessonInput(int number, int index) {
-        boolean valid = false;
-        for (Object bookingArray : bookingData) {
-            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
-            int booking = (int) bookingInfo.get(index);
-            if (number == booking) {
-                valid = true;
-                break; // Exit the loop since a valid input is found
+    public void bookingIDCheck(){
+        boolean validBookingID = false;
+        String chosenBookingID = "";
+        // Loop until a valid booking ID is provided
+        while (!validBookingID) {
+            System.out.println("Please enter the booking ID");
+            chosenBookingID = read.next().toUpperCase();
+            // Check if the chosen booking ID exists in the booked data
+            for (Object bookingArray : bookedData) {
+                ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+                String bookingID = (String) bookingInfo.get(0);
+                if (chosenBookingID.equals(bookingID)) {
+                    validBookingID = true;
+                    break;
+                }
+            }
+            if (!validBookingID) {
+                System.out.println("Invalid booking ID. Please enter a valid one.");
             }
         }
-        if (!valid) {
-            System.out.println("Invalid Input. Please enter a valid input.");
-            number = read.nextInt();
-            validateLessonInput(number, index); // Recursively call the method with the new input
-        }
     }
-
-    public void validateLessonInput(String character, int index) {
-        boolean valid = false;
-        for (Object bookingArray : bookingData) {
-            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
-            String booking = ((String) bookingInfo.get(index)).toUpperCase();
-            if (character.equals(booking)) {
-                valid = true;
-                break; // Exit the loop since a valid input is found
-            }
-        }
-        if (!valid) {
-            System.out.println("Invalid Input. Please enter a valid input.");
-            character = read.next();
-            validateLessonInput(character, index); // Recursively call the method with the new input
-        }
-    }
-
 
 }
 
