@@ -2,18 +2,16 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static javax.swing.UIManager.get;
-
-public class Student extends User {
+public class Student {
     private int grade;
     ArrayList<Object> studentData = Data.getStudentData();
     ArrayList<Object> bookingData = Booking.getBookingData();
+    ArrayList<Object> bookedData = Booking.getBookedDate();
     static ArrayList<ArrayList<Object>> lessonDisplay = new ArrayList<>();
     Scanner read = new Scanner(System.in);
 
     public void bookingClasses() {
-
-        System.out.println("\n\nPlease choose how you want to display the lessons:");
+        System.out.println("\nPlease choose how you want to display the lessons:");
         System.out.println("\t1. By Day \n\t2. By Coach Name \n\t3. By Grade");
         int lessonDisplayOptions = read.nextInt();
         if (lessonDisplayOptions > 0 && (lessonDisplayOptions < 4)) {
@@ -25,12 +23,15 @@ public class Student extends User {
                         ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
                         String Day = ((String) bookingInfo.get(1)).toUpperCase();
                         if (optionDay.equals(Day)) {
+                            String BID = (String) bookingInfo.get(0);
+                            Day = (String) bookingInfo.get(1);
                             int Date = (int) bookingInfo.get(2);
                             String Month = ((String) bookingInfo.get(3));
                             int Time = (int) bookingInfo.get(4);
                             String Coach = (String) bookingInfo.get(5);
                             int Grade = (int) bookingInfo.get(6);
-                            lessonDisplay(Day, Date, Month, Time, Coach, Grade);
+                            int Participants = (int) bookingInfo.get(7);
+                            lessonDisplay(BID,Day, Date, Month, Time, Coach, Grade, Participants);
                         }
                     }
                     if (lessonDisplay.isEmpty()) {
@@ -47,12 +48,15 @@ public class Student extends User {
                         ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
                         String Coach = (String) bookingInfo.get(5);
                         if (optionCoach.equals(Coach)) {
+                            String BID = (String) bookingInfo.get(0);
+                            String Day = (String) bookingInfo.get(1);
                             int Date = (int) bookingInfo.get(2);
                             String Month = ((String) bookingInfo.get(3));
                             int Time = (int) bookingInfo.get(4);
+                            Coach = (String) bookingInfo.get(5);
                             int Grade = (int) bookingInfo.get(6);
-                            String Day = ((String) bookingInfo.get(1)).toUpperCase();
-                            lessonDisplay(Day, Date, Month, Time, Coach, Grade);
+                            int Participants = (int) bookingInfo.get(7);
+                            lessonDisplay(BID,Day, Date, Month, Time, Coach, Grade, Participants);
                         }
                     }
                     if (lessonDisplay.isEmpty()) {
@@ -68,141 +72,121 @@ public class Student extends User {
                         ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
                         int Grade = (int) bookingInfo.get(6);
                         if (optionGrade == Grade) {
+                            String BID = (String) bookingInfo.get(0);
+                            String Day = (String) bookingInfo.get(1);
                             int Date = (int) bookingInfo.get(2);
                             String Month = ((String) bookingInfo.get(3));
                             int Time = (int) bookingInfo.get(4);
                             String Coach = (String) bookingInfo.get(5);
-                            String Day = ((String) bookingInfo.get(1)).toUpperCase();
-                            lessonDisplay(Day, Date, Month, Time, Coach, Grade);
+                            Grade = (int) bookingInfo.get(6);
+                            int Participants = (int) bookingInfo.get(7);
+                            lessonDisplay(BID,Day, Date, Month, Time, Coach, Grade, Participants);
                         }
                     }
                     if (lessonDisplay.isEmpty()) {
                         System.out.println("There is no available lessons on Grade " + optionGrade);
-                    } else {
+                    }else {
                         lessonPrint();
                     }
                     break;
             }
-        } else {
-            System.out.println("\n\nPlease enter valid option");
-            System.out.println("\n\t1. By Day \n\t2. By Coach Name \n\t3. By Grade");
+        }else{
+            System.out.println("\nPlease enter valid option");
+            System.out.println("\t1. By Day \n\t2. By Coach Name \n\t3. By Grade");
             lessonDisplayOptions = read.nextInt();
         }
-
         // array list have id, day, date, month, time, coach, grade, participants, rating, review
-        System.out.println("Please choose the lesson avaiable lesson");
         String Uid = Main.Uid;
-        System.out.println("Day: eg MON for Monday");
-        String chosenDay = read.next().toUpperCase();
-        boolean validDay = false;
-        for (Object bookingArray : bookingData) {
-            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
-            String bookingDay = (String) bookingInfo.get(1);
-            if (chosenDay.equals(bookingDay)) {
-                validDay = true;
-                break;
-            }
-        }
-        if (!validDay) {
-            System.out.println("Invalid day. Please enter a valid day.");
-            chosenDay = read.next().toUpperCase();
-        }
-        System.out.println("Month: eg APR for April");
-        String chosenMonth = read.next().toUpperCase();
-        boolean validMonth = false;
-        for (Object bookingArray : bookingData) {
-            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
-            String bookingDay = (String) bookingInfo.get(2);
-            if (chosenDay.equals(bookingDay)) {
-                validMonth = true;
-                break;
-            }
-        }
-        if (!validMonth) {
-            System.out.println("Invalid Month. Please enter a valid Month.");
-            chosenMonth = read.next().toUpperCase();
-        }
-        System.out.println("Date:");
-        int chosenDate = read.nextInt();
-        boolean validDate = false;
-        for (Object bookingArray : bookingData) {
-            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
-            int bookingDate = (int) bookingInfo.get(3);
-            if (chosenDate == bookingDate) {
-                validDate = true;
-                break;
-            }
-        }
-        if (!validDate) {
-            System.out.println("Invalid Date. Please enter a valid day.");
-            chosenDate = read.nextInt();
-        }
-        System.out.println("Time:");
-        int chosenTime = read.nextInt();
-        System.out.println("Coach Name: eg Halen");
-        String chosenCoach = read.next().toUpperCase();
-        System.out.println("Enter your grade or one step higher:");
-        int chosenGrade = read.nextInt();
+        System.out.println("Please enter the lesson avaiable lesson booking ID");
+        String choosenBookingID = read.next().toUpperCase();
 
-        // id, day, date, month, time, coach, grade, participants, rating, review
+        // id 0, day 1, date 2, month 3, time 4, coach 5, grade 6, participants 7, rating 8, review 9
+        // (BID 0,Day 1, Date 2, Month 3, Time 4, Coach 5, Grade 6, Participants 7)
         for (Object bookingArray : bookingData) {
             ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
-            String bookingId = (String) bookingInfo.get(0);
+            String bookingID = (String) bookingInfo.get(0);
             String bookingDay = (String) bookingInfo.get(1);
             int bookingDate = (int) bookingInfo.get(2);
             String bookingMonth = (String) bookingInfo.get(3);
             int bookingTime = (int) bookingInfo.get(4);
             String bookingCoach = ((String) bookingInfo.get(5)).toUpperCase();
             int bookingGrade = (int) bookingInfo.get(6);
-            /**
-             * yo if lai loop gardai check garna parxa hai
-             * make this nested if else. Like just check when user enter the day.
-             * if correct the only inside else asking again for valid day.
-             * When user give valid day then check date then month then remaining other.
-             */
-            if (chosenDay.equals(bookingDay) && chosenMonth.equals(bookingMonth) &&
-                    chosenDate == bookingDate && chosenTime == bookingTime &&
-                    chosenCoach.equals(bookingCoach) && chosenGrade == bookingGrade) {
-                int participants = 0; // These variables don't need to be redeclared here
+            int bookingParticipants = (int) bookingInfo.get(7);
+
+            if (choosenBookingID.equals(bookingID)) {
+                Booking.makeBooking(bookingID, bookingParticipants);
+                bookingInfo.set(7, bookingParticipants+1);
                 int cancelled = 0;
                 int rating = 0;
                 String review = "No Rating";
                 // Storing data from bookingData Array to BookedData Array
-                Booking.bookedData(bookingId, chosenDay, chosenMonth, chosenDate, chosenTime,
-                        chosenCoach, chosenGrade, participants, cancelled, rating, review);
+                Booking.bookedData(bookingID, bookingDay, bookingDate, bookingMonth, bookingTime,
+                        bookingCoach, bookingGrade, bookingParticipants, cancelled, rating, review);
+                System.out.println("Booking conformed!!");
+                System.out.println("You have lesson on "+bookingMonth+" "+bookingDay+" from "+bookingTime+" to "+(bookingTime+1));
             }
         }
     }
 
     public void bookingChanges() {
         Scanner read = new Scanner(System.in);
-        System.out.println("Do you with to Update or Cancel booking");
-        System.out.println("\t1. Update\n" +
-                "\t2. Cancel");
-        int n = read.nextInt();
-        try {
-            if (n == 1) {
-                System.out.println("Please enter your name");
-                String checkName = read.next();
-
-                System.out.println("Please enter your phone number: ");
-                String checkPhoneNumber = read.next();
-
-            } else if (n == 2) {
-                System.out.println("Please enter your name");
-                String checkName = read.next();
-
-                System.out.println("Please enter your phone number: ");
-                String checkPhoneNumber = read.next();
-
-            } else {
-                System.out.println("Invalid input..");
-                bookingChanges();
+        for (Object bookingArray : Booking.bookedDate) {
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            String Day = ((String) bookingInfo.get(1)).toUpperCase();
+            String BID = (String) bookingInfo.get(0);
+            Day = (String) bookingInfo.get(1);
+            int Date = (int) bookingInfo.get(2);
+            String Month = ((String) bookingInfo.get(3));
+            int Time = (int) bookingInfo.get(4);
+            String Coach = (String) bookingInfo.get(5);
+            int Grade = (int) bookingInfo.get(6);
+            int Participants = (int) bookingInfo.get(7);
+            lessonDisplay(BID ,Day, Date, Month, Time, Coach, Grade, Participants);
+        }
+        boolean validBookingID = false;
+        String chosenBookingID = "";
+        // Loop until a valid booking ID is provided
+        while (!validBookingID) {
+            System.out.println("Please enter the booking ID");
+            chosenBookingID = read.next().toUpperCase();
+            // Check if the chosen booking ID exists in the booked data
+            for (Object bookingArray : bookedData) {
+                ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+                String bookingID = (String) bookingInfo.get(0);
+                if (chosenBookingID.equals(bookingID)) {
+                    validBookingID = true;
+                    break;
+                }
             }
-
-        } catch (Exception e) {
-            System.out.println("Invalid input..");
-            bookingChanges();
+            if (!validBookingID) {
+                System.out.println("Invalid booking ID. Please enter a valid one.");
+            }
+        }
+        for (Object bookingArray : bookedData){
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            String bookingID = (String) bookingInfo.get(0);
+            int bookingParticipants = (int) bookingInfo.get(7);
+            if (Booking.userLessonRecord.containsKey(bookingID)) {
+                System.out.println("Do you with to Update or Cancel booking");
+                System.out.println("\t1. Cancel\n" +
+                        "\t2. Update");
+                int n = read.nextInt();
+                switch (n){
+                    case 1:
+                        bookingInfo.set(7, bookingParticipants-1);
+                        System.out.println("Booking Cancelled");
+                        break;
+                    case 2:
+                        bookingInfo.set(7, bookingParticipants-1);
+                        System.out.println("Updating the booking Data");
+                        bookingClasses();
+                        break;
+                    default:
+                        System.out.println("Invalid Input..");
+                        System.out.println("Please give the correct option");
+                        n = read.nextInt();
+                }
+            }
         }
     }
 
@@ -285,26 +269,30 @@ public class Student extends User {
         return "" + phoneNumber;
     }
 
-    static void lessonDisplay(String Day, int Date, String Month, int Time, String Coach, int Grade) {
+    static void lessonDisplay(String LessonID, String Day, int Date, String Month, int Time, String Coach, int Grade, int Participants) {
         ArrayList<Object> data = new ArrayList<>();
+        data.add(LessonID);
         data.add(Day);
         data.add(Date);
         data.add(Month);
         data.add(Time);
         data.add(Coach);
         data.add(Grade);
+        data.add(Participants);
         lessonDisplay.add(data);
     }
 
     public void lessonPrint(){
         for (ArrayList<Object> objects : lessonDisplay) {
-            String Day = ((String) objects.get(0)).toUpperCase(); // Index 0 for Day
-            int Date = (int) objects.get(1); // Index 1 for Date
-            String Month = ((String) objects.get(2)); // Index 2 for Month
-            int Time = (int) objects.get(3); // Index 3 for Time
-            String Coach = (String) objects.get(4); // Index 4 for Coach
-            int Grade = (int) objects.get(5); // Index 5 for Grade
-            System.out.println("Day: " + Day + "\tMonth: " + Month + "\tDate: " + Date +"\t\tTime: From " + Time + " to " + (Time + 1) + "\t\tCoach: " + Coach + "\tGrade: " + Grade);
+            String BID = ((String) objects.get(0)).toUpperCase();
+            String Day = ((String) objects.get(1)).toUpperCase(); // Index 0 for Day
+            int Date = (int) objects.get(2); // Index 1 for Date
+            String Month = ((String) objects.get(3)); // Index 2 for Month
+            int Time = (int) objects.get(4); // Index 3 for Time
+            String Coach = (String) objects.get(5); // Index 4 for Coach
+            int Grade = (int) objects.get(6); // Index 5 for Grade
+            int Participants = (int) objects.get(7); //Index 7  for Participants
+            System.out.println("Booking ID: "+BID+"\tDay: " + Day + "\tMonth: " + Month + "\tDate: " + Date +"\t\tTime: From " + Time + " to " + (Time + 1) + "\t\tCoach: " + Coach + "\tGrade: " + Grade+"\t Participants: "+Participants);
         }
     }
 
@@ -355,6 +343,42 @@ public class Student extends User {
             checkOption = read.next().toUpperCase();
         }
     }
+
+    public void validateLessonInput(int number, int index) {
+        boolean valid = false;
+        for (Object bookingArray : bookingData) {
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            int booking = (int) bookingInfo.get(index);
+            if (number == booking) {
+                valid = true;
+                break; // Exit the loop since a valid input is found
+            }
+        }
+        if (!valid) {
+            System.out.println("Invalid Input. Please enter a valid input.");
+            number = read.nextInt();
+            validateLessonInput(number, index); // Recursively call the method with the new input
+        }
+    }
+
+    public void validateLessonInput(String character, int index) {
+        boolean valid = false;
+        for (Object bookingArray : bookingData) {
+            ArrayList<Object> bookingInfo = (ArrayList<Object>) bookingArray;
+            String booking = ((String) bookingInfo.get(index)).toUpperCase();
+            if (character.equals(booking)) {
+                valid = true;
+                break; // Exit the loop since a valid input is found
+            }
+        }
+        if (!valid) {
+            System.out.println("Invalid Input. Please enter a valid input.");
+            character = read.next();
+            validateLessonInput(character, index); // Recursively call the method with the new input
+        }
+    }
+
+
 }
 
 

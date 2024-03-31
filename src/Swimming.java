@@ -19,15 +19,15 @@ public class Swimming {
             if(chooseNumber>=1 && chooseNumber<8 ){
                 switch (chooseNumber){
                     case 1:
-                        student.bookingClasses();
+                        student.bookingClasses();swimmingBookingStart();
                     case 2:
-                        student.bookingChanges();
+                        student.bookingChanges();swimmingBookingStart();
                     case 3:
-                        student.attendSwimming();
+                        student.attendSwimming();swimmingBookingStart();
                     case 4:
-                        student.lernerMonthlyReport();
+                        student.lernerMonthlyReport();swimmingBookingStart();
                     case 5:
-                        coach.coachMonthlyReport();
+                        coach.coachMonthlyReport();swimmingBookingStart();
                     case 6:
                         exit();
                 }
@@ -36,7 +36,8 @@ public class Swimming {
                 swimmingBookingStart();
             }
         }catch (Exception e) {
-            System.err.println("Invalid Input ( Main Method )..");
+            System.out.println(e.getMessage());
+            System.out.println("Invalid Input ( Main Method )..");
             swimmingBookingStart();
         }
     }

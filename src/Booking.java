@@ -1,60 +1,38 @@
+import java.util.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Booking {
 
     static ArrayList<Object> coachData = Coach.getCoachData();
+    ArrayList<String> bookings = new ArrayList<>();
 
+    //lessonDisplay(BID 0,Day 1, Date 2, Month 3, Time 4, Coach 5, Grade 6, Participants 7)
     static ArrayList<Object> bookingData = new ArrayList<>(Arrays.asList(
-            new ArrayList<>(Arrays.asList("M1APR45P", "MON", 1, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M1APR56P", "MON", 1, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M1APR67P", "MON", 1, "APR", 6, "Halen", 2)),
-            new ArrayList<>(Arrays.asList("W3APR45P", "WED", 3, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W3APR56P", "WED", 3, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W3APR67P", "WED", 3, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F5APR45P", "FRI", 5, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F5APR56P", "FRI", 5, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F5APR67P", "FRI", 5, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("S6APR23P", "SAT", 6, "APR", 2, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("S6APR34P", "SAT", 6, "APR", 3, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M8APR45P", "MON", 8, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M8APR56P", "MON", 8, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M8APR67P", "MON", 8, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W10APR45P", "WED", 10, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W10APR56P", "WED", 10, "APR", 5, "Halen", 4)),
-            new ArrayList<>(Arrays.asList("W10APR67P", "WED", 10, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F12APR45P", "FRI", 12, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F12APR56P", "FRI", 12, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F12APR67P", "FRI", 12, "APR", 6, "Halen", 5)),
-            new ArrayList<>(Arrays.asList("S13APR36P", "SAT", 13, "APR", 2, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("S13APR36P", "SAT", 13, "APR", 3, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M15APR45P", "MON", 15, "APR", 4, "Halen", 1)),
-            new ArrayList<>(Arrays.asList("M15APR56P", "MON", 15, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M15APR67P", "MON", 15, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W17APR45P", "WED", 17, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W17APR56P", "WED", 17, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W17APR67P", "WED", 17, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F19APR45P", "FRI", 19, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F19APR56P", "FRI", 19, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F19APR67P", "FRI", 19, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("S20APR36P", "SAT", 20, "APR", 2, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("S20APR36P", "SAT", 20, "APR", 3, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M22APR45P", "MON", 22, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M22APR56P", "MON", 22, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M22APR67P", "MON", 22, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W24APR45P", "WED", 24, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W24APR56P", "WED", 24, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("W24APR67P", "WED", 24, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F26APR45P", "FRI", 26, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F26APR56P", "FRI", 26, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("F26APR67P", "FRI", 26, "APR", 6, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("S27APR36P", "SAT", 27, "APR", 2, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("S27APR36P", "SAT", 27, "APR", 3, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M29APR45P", "MON", 29, "APR", 4, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M29APR56P", "MON", 29, "APR", 5, "Halen", 3)),
-            new ArrayList<>(Arrays.asList("M29APR67P", "MON", 29, "APR", 6, "Halen", 3))
+            new ArrayList<>(Arrays.asList("M1APR45P", "MON", 1, "APR", 4, "Halen", 3, 4)),
+            new ArrayList<>(Arrays.asList("M1APR56P", "MON", 1, "APR", 5, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("M1APR67P", "MON", 1, "APR", 6, "Halen", 2, 0)),
+            new ArrayList<>(Arrays.asList("W3APR45P", "WED", 3, "APR", 4, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("W3APR56P", "WED", 3, "APR", 5, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("W3APR67P", "WED", 3, "APR", 6, "Halen", 3, 3)),
+            new ArrayList<>(Arrays.asList("F5APR45P", "FRI", 5, "APR", 4, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("F5APR56P", "FRI", 5, "APR", 5, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("F5APR67P", "FRI", 5, "APR", 6, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("S6APR23P", "SAT", 6, "APR", 2, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("S6APR34P", "SAT", 6, "APR", 3, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("M8APR45P", "MON", 8, "APR", 4, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("M8APR56P", "MON", 8, "APR", 5, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("M8APR67P", "MON", 8, "APR", 6, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("W10APR45P", "WED", 10, "APR", 4, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("W10APR56P", "WED", 10, "APR", 5, "Halen", 4, 0)),
+            new ArrayList<>(Arrays.asList("W10APR67P", "WED", 10, "APR", 6, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("F12APR45P", "FRI", 12, "APR", 4, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("F12APR56P", "FRI", 12, "APR", 5, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("F12APR67P", "FRI", 12, "APR", 6, "Halen", 5, 0)),
+            new ArrayList<>(Arrays.asList("S13APR36P", "SAT", 13, "APR", 2, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("S13APR36P", "SAT", 13, "APR", 3, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("M15APR45P", "MON", 15, "APR", 4, "Halen", 1, 0)),
+            new ArrayList<>(Arrays.asList("M15APR56P", "MON", 15, "APR", 5, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("M15APR67P", "MON", 15, "APR", 6, "Halen", 3, 0))
     ));
 
     // array list have id, day, date, month, time, coach, grade, participants, rating, review
@@ -112,22 +90,16 @@ public class Booking {
         return bookingData;
     }
 
-    public static void setBookingData(ArrayList<Object> bookingData) {
-        Booking.bookingData = bookingData;
-    }
+
+
+    static ArrayList<Object> bookedDate = new ArrayList<>();
 
     public static ArrayList<Object> getBookedDate() {
         return bookedDate;
     }
 
-    public static void setBookedDate(ArrayList<Object> bookedDate) {
-        Booking.bookedDate = bookedDate;
-    }
-
-    static ArrayList<Object> bookedDate = new ArrayList<>();
-
     // array list have id, day, date, month, time, coach, grade, participants, rating, review
-    static void bookedData(String BID, String Day, String Date, int Month, int Time, String Coach, int Grade, int Participants, int Rating, int Review, String review) {
+    static void bookedData(String BID, String Day, int Date, String Month, int Time, String Coach, int Grade, int Participants, int Rating, int Review, String review) {
         ArrayList<Object> data = new ArrayList<>();
         data.add(BID);
         data.add(Day);
@@ -142,20 +114,34 @@ public class Booking {
         bookedDate.add(data);
     }
 
-    static Map<String, ArrayList<String>> userLesson = new HashMap<>();
 
-    static void addUserToLesson(String bookingId, String userId) {
-        // Check if the bookingId already exists in the map
-        if (userLesson.containsKey(bookingId)) {
-            // If it does, get the ArrayList of user IDs and add the new user ID to it
-            ArrayList<String> userIds = userLesson.get(bookingId);
-            userIds.add(userId);
+    static Map<String, ArrayList<String>> userLessonRecord = new HashMap<String, ArrayList<String>>() {{
+        // Initialize the HashMap with the desired data
+        put("W3APR67P", new ArrayList<>(Arrays.asList("JAM145", "OLI678", "CHA042")));
+        put("M1APR45P", new ArrayList<>(Arrays.asList("EMI769", "OLI678", "CHA042", "JAM145")));
+    }};
+
+    public static void makeBooking(String bookingId, int bookingParticipants) {
+        if (userLessonRecord.containsKey(bookingId)) {
+            ArrayList<String> users = userLessonRecord.get(bookingId);
+            if (bookingParticipants > 4) {
+                System.out.println("Sorry, maximum users reached for this lesson.");
+                Swimming.swimmingBookingStart();
+            } else {
+                String userId = Main.Uid;
+                boolean userExists = users.contains(userId);
+                if (!userExists) {
+                    users.add(userId); // Add userId to the list of users
+                    userLessonRecord.put(bookingId, users); // Update the list of users for the bookingId
+                } else {
+                    System.out.println("User ID already exists for this booking ID.");
+                    Swimming.swimmingBookingStart();
+                }
+            }
         } else {
-            // If it doesn't, create a new ArrayList, add the user ID to it, and put it in the map
-            ArrayList<String> userIds = new ArrayList<>();
-            userIds.add(userId);
-            userLesson.put(bookingId, userIds);
+            Scanner read = new Scanner(System.in);
+            System.out.println("Invalid booking ID.");
+            bookingId = read.next();
         }
     }
-
 }
