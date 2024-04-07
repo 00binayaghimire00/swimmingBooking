@@ -1,22 +1,17 @@
-package com.hatfield_swimmingbooking.util;
-
-import com.hatfield_swimmingbooking.functionality.Swimming;
-import com.hatfield_swimmingbooking.main.Main;
-
 import java.util.*;
 import java.util.ArrayList;
 
-public class Booking {
+public class BookingData {
 
-    //lessonDisplay(BID 0,Day 1, Date 2, Month 3, Time 4, com.hatfield_swimmingbooking.functionality.Coach 5, Grade 6, Participants 7)
+    //lessonDisplay(BID 0,Day 1, Date 2, Month 3, Time 4, com.hatfield_swimmingbooking.util.Coach 5, Grade 6, Participants 7)
     static ArrayList<Object> bookingData = new ArrayList<>(Arrays.asList(
             new ArrayList<>(Arrays.asList("M1APR45P", "MON", 1, "APR", 4, "Halen", 3, 4)),
-            new ArrayList<>(Arrays.asList("M1APR56P", "MON", 1, "APR", 5, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("M1APR56P", "MON", 1, "APR", 5, "Halen", 0, 0)),
             new ArrayList<>(Arrays.asList("M1APR67P", "MON", 1, "APR", 6, "Halen", 2, 0)),
             new ArrayList<>(Arrays.asList("W3APR45P", "WED", 3, "APR", 4, "Halen", 3, 0)),
-            new ArrayList<>(Arrays.asList("W3APR56P", "WED", 3, "APR", 5, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("W3APR56P", "WED", 3, "APR", 5, "Halen", 1, 0)),
             new ArrayList<>(Arrays.asList("W3APR67P", "WED", 3, "APR", 6, "Halen", 3, 3)),
-            new ArrayList<>(Arrays.asList("F5APR45P", "FRI", 5, "APR", 4, "Halen", 3, 0)),
+            new ArrayList<>(Arrays.asList("F5APR45P", "FRI", 5, "APR", 4, "Halen", 0, 0)),
             new ArrayList<>(Arrays.asList("F5APR56P", "FRI", 5, "APR", 5, "Halen", 3, 0)),
             new ArrayList<>(Arrays.asList("F5APR67P", "FRI", 5, "APR", 6, "Halen", 3, 0)),
             new ArrayList<>(Arrays.asList("S6APR23P", "SAT", 6, "APR", 2, "Halen", 3, 0)),
@@ -37,7 +32,7 @@ public class Booking {
             new ArrayList<>(Arrays.asList("M15APR67P", "MON", 15, "APR", 6, "Halen", 3, 0))
     ));
 
-    // array list have String BID 0, String Day 1, int Date 2, String Month 3, int Time 4, String com.hatfield_swimmingbooking.functionality.Coach 5,
+    // array list have String BID 0, String Day 1, int Date 2, String Month 3, int Time 4, String com.hatfield_swimmingbooking.util.Coach 5,
     // int Grade 6, int Participants 7,int Booked 8, int Cancelled 9, int Attended 10, int Rating 11, String Review 12
     static ArrayList<Object> oldBookedData = new ArrayList<>(Arrays.asList(
             new ArrayList<>(Arrays.asList("M1MAR45P", "MON", 1, "APR", 4, "Halen", 4, 3, 0, 0, 0, 6, "Good coach with good knpwledge")),
@@ -135,7 +130,7 @@ public class Booking {
     }
 
     public static void setBookingData(ArrayList<Object> bookingData) {
-        Booking.bookingData = bookingData;
+        BookingData.bookingData = bookingData;
     }
 
     public static ArrayList<Object> getOldBookedData() {
@@ -143,11 +138,11 @@ public class Booking {
     }
 
     public static void setOldBookedData(ArrayList<Object> oldBookedData) {
-        Booking.oldBookedData = oldBookedData;
+        BookingData.oldBookedData = oldBookedData;
     }
 
     public static void setBookedDate(ArrayList<Object> bookedDate) {
-        Booking.bookedDate = bookedDate;
+        BookingData.bookedDate = bookedDate;
     }
 
     public static Map<String, ArrayList<String>> getUserLessonRecord() {
@@ -155,7 +150,7 @@ public class Booking {
     }
 
     public static void setUserLessonRecord(Map<String, ArrayList<String>> userLessonRecord) {
-        Booking.userLessonRecord = userLessonRecord;
+        BookingData.userLessonRecord = userLessonRecord;
     }
 
     public static Map<String, Integer> getAttendanceRecord() {
@@ -163,7 +158,7 @@ public class Booking {
     }
 
     public static void setAttendanceRecord(Map<String, Integer> attendanceRecord) {
-        Booking.attendanceRecord = attendanceRecord;
+        BookingData.attendanceRecord = attendanceRecord;
     }
 
     static Map<String, ArrayList<String>> userLessonRecord = new HashMap<String, ArrayList<String>>() {{
@@ -177,7 +172,7 @@ public class Booking {
             ArrayList<String> users = userLessonRecord.get(bookingId);
             if (bookingParticipants > 4) {
                 System.out.println("Sorry, maximum users reached for this lesson.");
-                Swimming.swimmingBookingStart();
+                SwimmingController.swimmingBookingStart();
             } else {
                 String userId = Main.Uid;
                 boolean userExists = users.contains(userId);
@@ -186,7 +181,7 @@ public class Booking {
                     userLessonRecord.put(bookingId, users); // Update the list of users for the bookingId
                 } else {
                     System.out.println("User ID already exists for this booking ID.\n You may have already booked or cancelled this lesson before");
-                    Swimming.swimmingBookingStart();
+                    SwimmingController.swimmingBookingStart();
                 }
             }
         } else {

@@ -1,17 +1,11 @@
-package com.hatfield_swimmingbooking.functionality;
-
-import com.hatfield_swimmingbooking.functionality.Coach;
-import com.hatfield_swimmingbooking.functionality.Student;
-import com.hatfield_swimmingbooking.main.Main;
-import com.hatfield_swimmingbooking.util.Data;
-
 import java.util.ArrayList;
 import java.util.Scanner;
- public  class Swimming{
+ public  class SwimmingController {
 
  public static void swimmingBookingStart(){
      try{
          Scanner reader = new Scanner(System.in);
+         System.out.println(StudentData.getStudentData());
          System.out.println("Please Choose Numbers from the followings");
          System.out.println("""
                     \t1. Book a Swimming Lesson
@@ -24,8 +18,8 @@ import java.util.Scanner;
                     """);
          System.out.println("Enter: ");
          int chooseNumber = reader.nextInt();
-         Student student = new Student();
-         Coach coach = new Coach();
+         StudentController student = new StudentController();
+         CoachData coach = new CoachData();
          if(chooseNumber>=1 && chooseNumber<8 ){
              switch (chooseNumber){
                  case 1:
@@ -44,7 +38,7 @@ import java.util.Scanner;
                      coach.coachMonthlyReport();swimmingBookingStart();
                      break;
                  case 6:
-                     for(Object userArray : Data.getStudentData()){
+                     for(Object userArray : StudentData.getStudentData()){
                          ArrayList<Object> userInfo = (ArrayList<Object>) userArray;
                          String userID = (String) userInfo.getFirst();
                          if(Main.Uid.equals(userID)){
@@ -65,21 +59,21 @@ import java.util.Scanner;
          }
      }catch (Exception e) {
          System.out.println(e.getMessage());
-         System.out.println("Invalid Input ( com.hatfield_swimmingbooking.main.Main Method )..");
+         System.out.println("Invalid Input ( Main Method )..");
          swimmingBookingStart();
      }
  }
 
  public static void signInSignOut(){
-     ArrayList<Object> studentData = Data.getStudentData();
+     ArrayList<Object> studentData = StudentData.getStudentData();
      System.out.println("Welcome to Hatfield Junior com.hatfield_swimmingbooking.functionality.Swimming School");
-     Student student = new Student();
+     StudentController student = new StudentController();
      student.checkingUser();
      swimmingBookingStart();
  }
  public static void exit() {
      // uid 0 , name 1, age 2, phone number 3, gender 4, grade 5, booked 7, cancelled 8, attained 9
-     for(Object userArray : Data.getStudentData()){
+     for(Object userArray : StudentData.getStudentData()){
          ArrayList<Object> userInfo = (ArrayList<Object>) userArray;
          String userID = (String) userInfo.getFirst();
          if(Main.Uid.equals(userID)){

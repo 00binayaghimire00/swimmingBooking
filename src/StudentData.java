@@ -1,10 +1,8 @@
-package com.hatfield_swimmingbooking.util;
-
 import java.util.*;
 
-public class Data {
+public class StudentData {
 
-    public Data() {
+    public StudentData() {
     }
 
     // uid 0 , name 1, age 2, phone number 3, gender 4, grade 5, booked 6, cancelled 7, attained 8

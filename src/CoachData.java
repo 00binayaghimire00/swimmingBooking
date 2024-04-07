@@ -1,11 +1,7 @@
-package com.hatfield_swimmingbooking.functionality;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Coach {
-
-    public Coach(){}
+public class CoachData {
 
     static ArrayList<Object> coachData = new ArrayList<>(Arrays.asList(
             new ArrayList<>(Arrays.asList("Michael", 47 , 6, 7.83)),
@@ -49,7 +45,7 @@ public class Coach {
             String formattedRating = String.format("%-" + MAX_RATING_WIDTH + ".2f", avarageRating);
 
             // Print the formatted coach information
-            System.out.println("com.hatfield_swimmingbooking.functionality.Coach Name: " + formattedName + "\tRating: " + formattedRating);
+            System.out.println("com.hatfield_swimmingbooking.util.Coach Name: " + formattedName + "\tRating: " + formattedRating);
         }
 
     }
