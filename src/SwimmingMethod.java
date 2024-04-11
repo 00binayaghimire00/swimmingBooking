@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
- public  class SwimmingController {
+ public  class SwimmingMethod {
 
  public static void swimmingBookingStart(){
      try{
          Scanner reader = new Scanner(System.in);
-         System.out.println(StudentData.getStudentData());
+         System.out.println(StudentData.studentData);
+         System.out.println("Booked: "+Main.userBookedLessons+"\tCancelled: "+Main.userCancelledLesson+"\tAttained: "+Main.userAttendedLessons);
          System.out.println("Please Choose Numbers from the followings");
          System.out.println("""
                     \t1. Book a Swimming Lesson
@@ -13,12 +14,12 @@ import java.util.Scanner;
                     \t3. Attend a Swimming Lesson
                     \t4. Monthly Learner Report
                     \t5. Monthly Coach Report
-                    \t6. Sign Out
+                    \t6. Register New Lerner
                     \t7. Exit the System
                     """);
          System.out.println("Enter: ");
          int chooseNumber = reader.nextInt();
-         StudentController student = new StudentController();
+         StudentMethod student = new StudentMethod();
          CoachData coach = new CoachData();
          if(chooseNumber>=1 && chooseNumber<8 ){
              switch (chooseNumber){
@@ -38,16 +39,8 @@ import java.util.Scanner;
                      coach.coachMonthlyReport();swimmingBookingStart();
                      break;
                  case 6:
-                     for(Object userArray : StudentData.getStudentData()){
-                         ArrayList<Object> userInfo = (ArrayList<Object>) userArray;
-                         String userID = (String) userInfo.getFirst();
-                         if(Main.Uid.equals(userID)){
-                             userInfo.set(6, Main.userBookedLessons);
-                             userInfo.set(7, Main.userCancelledLesson);
-                             userInfo.set(8, Main.userAttendedLessons);
-                         }
-                     }
-                     signInSignOut();
+
+                     student.registerLerner();
                      break;
                  case 7:
                      exit();
@@ -64,24 +57,22 @@ import java.util.Scanner;
      }
  }
 
- public static void signInSignOut(){
-     ArrayList<Object> studentData = StudentData.getStudentData();
-     System.out.println("Welcome to Hatfield Junior com.hatfield_swimmingbooking.functionality.Swimming School");
-     StudentController student = new StudentController();
-     student.checkingUser();
-     swimmingBookingStart();
- }
- public static void exit() {
-     // uid 0 , name 1, age 2, phone number 3, gender 4, grade 5, booked 7, cancelled 8, attained 9
-     for(Object userArray : StudentData.getStudentData()){
+
+ public static void setUserRecord(){
+     for(Object userArray : StudentData.studentData){
          ArrayList<Object> userInfo = (ArrayList<Object>) userArray;
-         String userID = (String) userInfo.getFirst();
+         String userID = (String) userInfo.get(0);
          if(Main.Uid.equals(userID)){
+             userInfo.set(5, Main.Grade);
              userInfo.set(6, Main.userBookedLessons);
              userInfo.set(7, Main.userCancelledLesson);
              userInfo.set(8, Main.userAttendedLessons);
          }
      }
+ }
+ public static void exit() {
+     // uid 0 , name 1, age 2, phone number 3, gender 4, grade 5, booked 7, cancelled 8, attained 9
+     setUserRecord();
      System.out.println("Exiting the system...");
      System.exit(0);
  }
