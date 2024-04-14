@@ -1,3 +1,7 @@
+package Data;
+
+import Main.Main;
+
 public class StoreUserData {
     public StoreUserData(String name, String uid, int grade) {
         Main.Name = name;
