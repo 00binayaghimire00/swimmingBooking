@@ -1,13 +1,10 @@
-package Controller;
-import Data.BookingData;
+package Model;
 import ExceptionHandeling.InputHandeling;
 import View.SwimmingLessonView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static Data.CoachData.coachData;
+import static Model.CoachData.coachData;
 
 public class CoachDataController {
     public static double calculatingCoachRating(String coach, int rating) {

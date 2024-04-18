@@ -1,19 +1,19 @@
 package Controller;
-import Data.BookingData;
-import Data.StudentData;
+import Model.BookingData;
+import Model.LearnerData;
 import ExceptionHandeling.InputHandeling;
 import Main.Main;
+import Model.StudentDataController;
 import View.SwimmingLessonView;
 
 import java.util.ArrayList;
-import static Data.BookingData.bookingData;
+import static Model.BookingData.bookingData;
 
 public class ValidatingController {
     public static int checkAge(int age) {
         while (age < 4 || age > 11) {
             System.out.println("Your age must be between 4 and 11. Please enter your age again: ");
             age = InputHandeling.getUserIntInput();
-
         }
         return age;
     }
@@ -35,8 +35,8 @@ public class ValidatingController {
     }
 
     public static void checkingUser(String choosenOption) {
-        checkingYorM(choosenOption);
-        if (choosenOption.equals("Y")) {
+        String inoutFromYorN = checkingYorM(choosenOption);
+        if (inoutFromYorN.equals("Y")) {
             StudentDataController.displayUsersList();
         }
         System.out.println("Please enter your name:");
@@ -77,17 +77,18 @@ public class ValidatingController {
         return choosenBookingID;
     }
 
-    public static void checkingYorM(String choosenOption){
+    public static String checkingYorM(String choosenOption) {
         while (!choosenOption.equals("Y") && !choosenOption.equals("N")) {
             System.out.println("Invalid input. Please enter 'Y' or 'N':");
             choosenOption = InputHandeling.getUserStringInput().toUpperCase();
         }
+        return choosenOption;
     }
 
     public static void checkingUserName(String chosenName){
         boolean validName = false;
         while (!validName) {
-            for (Object arrayName : StudentData.studentData) {
+            for (Object arrayName : LearnerData.LearnerData) {
                 ArrayList<Object> studentInfo = (ArrayList<Object>) arrayName;
                 String name = ((String) studentInfo.get(1)).toUpperCase();
                 if (name.equals(chosenName)) {
@@ -98,7 +99,7 @@ public class ValidatingController {
                     Main.userAttendedLessons = (int) studentInfo.get(8);
                     Main.userCancelledLesson = (int) studentInfo.get(7);
                     Main.userBookedLessons = (int) studentInfo.get(6);
-                    break;
+                    break; // Exit the loop once a valid name is found
                 }
             }
             if (!validName) {

@@ -1,12 +1,10 @@
-package Data;
-
+package Model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BookingData {
-    //lessonDisplay(BID 0,Day 1, Date 2, Month 3, Time 4, Coach 5, Grade 6, Participants 7)
     public static ArrayList<Object> bookingData = new ArrayList<>(Arrays.asList(
             new ArrayList<>(Arrays.asList("M1APR45P", "MON", 1, "APR", 4, "Michael", 3, 4)),
             new ArrayList<>(Arrays.asList("M1APR56P", "MON", 1, "APR", 5, "Sophie", 2, 3)),
@@ -60,56 +58,54 @@ public class BookingData {
             new ArrayList<>(Arrays.asList("W1MAY67P", "WED", 1, "MAY", 6, "Michael", 5, 0))
     ));
 
-    // array list have String BID 0, String Day 1, int Date 2, String Month 3, int Time 4, String Coach 5,
-    // int Grade 6, int Participants 7,int Booked 8, int Cancelled 9, int Attended 10, int Rating 11, String Review 12
     public static ArrayList<Object> previousBookingData = new ArrayList<>(Arrays.asList(
-            new ArrayList<>(Arrays.asList("M1MAR45P", "MON", 1, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M1MAR56P", "MON", 1, "MAR", 5, "Michael", 4, 3, 2, 4, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M1MAR67P", "MON", 1, "MAR", 6, "Jessica", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W3MAR45P", "WED", 3, "MAR", 4, "Sophie", 4, 3, 0, 0, 6, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W3MAR56P", "WED", 3, "MAR", 5, "Benjamin", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W3MAR67P", "WED", 3, "MAR", 6, "Michael", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F5MAR45P", "FRI", 5, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 0, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F5MAR56P", "FRI", 5, "MAR", 5, "Jessica", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F5MAR67P", "FRI", 5, "MAR", 6, "Sophie", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("S6MAR23P", "SAT", 6, "MAR", 2, "Benjamin", 4, 3, 0, 0, 0, 0, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("S6MAR34P", "SAT", 6, "MAR", 3, "Michael", 4, 3, 0, 0, 0, 0, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M8MAR45P", "MON", 8, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M8MAR56P", "MON", 8, "MAR", 5, "Jessica", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M8MAR67P", "MON", 8, "MAR", 6, "Michael", 4, 3, 0, 0, 0, 5, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W10MAR45P", "WED", 10, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 3, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W10MAR56P", "WED", 10, "MAR", 5, "Benjamin", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W10MAR67P", "WED", 10, "MAR", 6, "Michael", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F12MAR45P", "FRI", 12, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F12MAR56P", "FRI", 12, "MAR", 5, "Benjamin", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F12MAR67P", "FRI", 12, "MAR", 6, "Sophie", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("S13MAR36P", "SAT", 13, "MAR", 2, "Jessica", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("S13MAR36P", "SAT", 13, "MAR", 3, "Michael", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M15MAR45P", "MON", 15, "MAR", 4, "Benjamin", 4, 3, 0, 0, 0, 0, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M15MAR56P", "MON", 15, "MAR", 5, "Halen", 4, 3, 0, 0, 0, 0, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M15MAR67P", "MON", 15, "MAR", 6, "Sophie", 4, 3, 0, 0, 0, 0, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W17MAR45P", "WED", 17, "MAR", 4, "Jessica", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W17MAR56P", "WED", 17, "MAR", 5, "Benjamin", 4, 3, 0, 0, 0, 3, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W17MAR67P", "WED", 17, "MAR", 6, "Michael", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F19MAR45P", "FRI", 19, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 5, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F19MAR56P", "FRI", 19, "MAR", 5, "Jessica", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F19MAR67P", "FRI", 19, "MAR", 6, "Benjamin", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("S20MAR36P", "SAT", 20, "MAR", 2, "Michael", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("S20MAR36P", "SAT", 20, "MAR", 3, "Halen", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M22MAR45P", "MON", 22, "APR", 4, "Sophie", 4, 3, 0, 0, 0, 3, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M22MAR56P", "MON", 22, "APR", 5, "Jessica", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M22MAR67P", "MON", 22, "APR", 6, "Benjamin", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W24MAR45P", "WED", 24, "APR", 4, "Sophie", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W24MAR56P", "WED", 24, "APR", 5, "Jessica", 4, 3, 0, 0, 0, 3, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("W24MAR67P", "WED", 24, "APR", 6, "Sophie", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F26MAR45P", "FRI", 26, "APR", 4, "Michael", 4, 3, 0, 0, 0, 3, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F26MAR56P", "FRI", 26, "APR", 5, "Jessica", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("F26MAR67P", "FRI", 26, "APR", 6, "Sophie", 4, 3, 0, 0, 0, 2, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("S27MAR36P", "SAT", 27, "APR", 2, "Benjamin", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("S27MAR36P", "SAT", 27, "APR", 3, "Sophie", 4, 3, 0, 0, 0, 1, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M29MAR45P", "MON", 29, "APR", 4, "Michael", 4, 3, 0, 0, 0, 0, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M29MAR56P", "MON", 29, "APR", 5, "Sophie", 4, 3, 0, 0, 0, 4, "Good coach with good knpwledge")),
-            new ArrayList<>(Arrays.asList("M29MAR67P", "MON", 29, "APR", 6, "Benjamin", 4, 3, 0, 0, 0, 3, "Good coach with good knpwledge"))
+            new ArrayList<>(Arrays.asList("M1MAR45P", "MON", 1, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M1MAR56P", "MON", 1, "MAR", 5, "Michael", 4, 3, 2, 4, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M1MAR67P", "MON", 1, "MAR", 6, "Jessica", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W3MAR45P", "WED", 3, "MAR", 4, "Sophie", 4, 3, 0, 0, 6, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W3MAR56P", "WED", 3, "MAR", 5, "Benjamin", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W3MAR67P", "WED", 3, "MAR", 6, "Michael", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F5MAR45P", "FRI", 5, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 0, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F5MAR56P", "FRI", 5, "MAR", 5, "Jessica", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F5MAR67P", "FRI", 5, "MAR", 6, "Sophie", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("S6MAR23P", "SAT", 6, "MAR", 2, "Benjamin", 4, 3, 0, 0, 0, 0, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("S6MAR34P", "SAT", 6, "MAR", 3, "Michael", 4, 3, 0, 0, 0, 0, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M8MAR45P", "MON", 8, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M8MAR56P", "MON", 8, "MAR", 5, "Jessica", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M8MAR67P", "MON", 8, "MAR", 6, "Michael", 4, 3, 0, 0, 0, 5, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W10MAR45P", "WED", 10, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 3, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W10MAR56P", "WED", 10, "MAR", 5, "Benjamin", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W10MAR67P", "WED", 10, "MAR", 6, "Michael", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F12MAR45P", "FRI", 12, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F12MAR56P", "FRI", 12, "MAR", 5, "Benjamin", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F12MAR67P", "FRI", 12, "MAR", 6, "Sophie", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("S13MAR36P", "SAT", 13, "MAR", 2, "Jessica", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("S13MAR36P", "SAT", 13, "MAR", 3, "Michael", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M15MAR45P", "MON", 15, "MAR", 4, "Benjamin", 4, 3, 0, 0, 0, 0, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M15MAR56P", "MON", 15, "MAR", 5, "Halen", 4, 3, 0, 0, 0, 0, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M15MAR67P", "MON", 15, "MAR", 6, "Sophie", 4, 3, 0, 0, 0, 0, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W17MAR45P", "WED", 17, "MAR", 4, "Jessica", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W17MAR56P", "WED", 17, "MAR", 5, "Benjamin", 4, 3, 0, 0, 0, 3, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W17MAR67P", "WED", 17, "MAR", 6, "Michael", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F19MAR45P", "FRI", 19, "MAR", 4, "Sophie", 4, 3, 0, 0, 0, 5, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F19MAR56P", "FRI", 19, "MAR", 5, "Jessica", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F19MAR67P", "FRI", 19, "MAR", 6, "Benjamin", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("S20MAR36P", "SAT", 20, "MAR", 2, "Michael", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("S20MAR36P", "SAT", 20, "MAR", 3, "Halen", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M22MAR45P", "MON", 22, "APR", 4, "Sophie", 4, 3, 0, 0, 0, 3, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M22MAR56P", "MON", 22, "APR", 5, "Jessica", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M22MAR67P", "MON", 22, "APR", 6, "Benjamin", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W24MAR45P", "WED", 24, "APR", 4, "Sophie", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W24MAR56P", "WED", 24, "APR", 5, "Jessica", 4, 3, 0, 0, 0, 3, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("W24MAR67P", "WED", 24, "APR", 6, "Sophie", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F26MAR45P", "FRI", 26, "APR", 4, "Michael", 4, 3, 0, 0, 0, 3, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F26MAR56P", "FRI", 26, "APR", 5, "Jessica", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("F26MAR67P", "FRI", 26, "APR", 6, "Sophie", 4, 3, 0, 0, 0, 2, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("S27MAR36P", "SAT", 27, "APR", 2, "Benjamin", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("S27MAR36P", "SAT", 27, "APR", 3, "Sophie", 4, 3, 0, 0, 0, 1, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M29MAR45P", "MON", 29, "APR", 4, "Michael", 4, 3, 0, 0, 0, 0, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M29MAR56P", "MON", 29, "APR", 5, "Sophie", 4, 3, 0, 0, 0, 4, "Good coach with good knowledge")),
+            new ArrayList<>(Arrays.asList("M29MAR67P", "MON", 29, "APR", 6, "Benjamin", 4, 3, 0, 0, 0, 3, "Good coach with good knowledge"))
     ));
 
     public static ArrayList<Object> bookedDate = new ArrayList<>(Arrays.asList(
@@ -147,7 +143,6 @@ public class BookingData {
     public static Map<String, ArrayList<String>> userAttendedStatus = new HashMap<>() {{
         put("M1APR56P", new ArrayList<>(Arrays.asList("EMI769")));
     }};
-
     public static Map<String, ArrayList<String>> userLessonRecord = new HashMap<>() {{
         put("M1APR45P", new ArrayList<>(Arrays.asList("JAM145", "OLI678", "AVA456", "JAM145")));
         put("M1APR56P", new ArrayList<>(Arrays.asList("OLI678", "CHA042", "EMI769")));
@@ -161,6 +156,5 @@ public class BookingData {
         put("S6APR23P", new ArrayList<>(Arrays.asList("CHA042", "JAM145", "RYA123", "AVA456")));
         put("S6APR34P", new ArrayList<>(Arrays.asList("EMI769")));
     }};
-
     public static Map<String, Integer> attendanceRecord = new HashMap<>();
 }

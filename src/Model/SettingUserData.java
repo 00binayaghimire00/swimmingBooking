@@ -1,12 +1,10 @@
-package Data;
-
+package Model;
 import Main.Main;
-
 import java.util.List;
 
 public class SettingUserData {
     public static void setUserRecord() {
-        for (Object userArray : StudentData.studentData) {
+        for (Object userArray : LearnerData.LearnerData) {
             List<Object> userInfo = (List<Object>) userArray;
             String userID = (String) userInfo.get(0);
             if (Main.Uid.equals(userID)) {
@@ -17,6 +15,4 @@ public class SettingUserData {
             }
         }
     }
-
 }
-

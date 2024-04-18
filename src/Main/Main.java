@@ -1,5 +1,4 @@
 package Main;
-
 import View.SwimmingLessonView;
 
 public class Main {
@@ -17,5 +16,4 @@ public class Main {
         System.out.println("Either of these actions will take you back to the main menu. Enjoy navigating through the application!" );
         SwimmingLessonView.swimmingBookingStart();
     }
-
 }

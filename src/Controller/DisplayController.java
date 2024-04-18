@@ -1,5 +1,5 @@
 package Controller;
-import Data.BookingData;
+import Model.BookingData;
 import ExceptionHandeling.InputHandeling;
 import Main.Main;
 import View.SwimmingLessonView;
@@ -7,7 +7,7 @@ import View.SwimmingLessonView;
 import java.util.ArrayList;
 import java.util.Map;
 import static Controller.LernerController.lessonDisplay;
-import static Data.BookingData.bookingData;
+import static Model.BookingData.bookingData;
 
 public class DisplayController {
     static void lessonDisplay(String LessonID, String Day, int Date, String Month, int Time, String Coach, int Grade, int Participants) {
@@ -118,6 +118,7 @@ public class DisplayController {
 
         if (checkEmpty == 0) {
             System.out.println("No data available");
+            SwimmingLessonView.swimmingBookingStart();
         }
     }
 

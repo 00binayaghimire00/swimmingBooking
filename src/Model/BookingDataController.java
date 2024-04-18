@@ -1,31 +1,34 @@
-package Controller;
+package Model;
 
 import View.SwimmingLessonView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import static Data.BookingData.*;
+import static Model.BookingData.*;
 public class BookingDataController {
 
     public static void moveUser(String userID, String bookingID, Map<String, ArrayList<String>> fromMap, Map<String, ArrayList<String>> toMap) {
+        boolean isRemoved = false;
         if (fromMap.containsKey(bookingID)) {
             ArrayList<String> users = fromMap.get(bookingID);
             if (users.contains(userID)) {
                 // Remove user from the booked status
-                users.remove(userID);
-                fromMap.put(bookingID, users);
-
-                // Add user to the new status
-                ArrayList<String> newUsers;
-                if (toMap.containsKey(bookingID)) {
-                    newUsers = toMap.get(bookingID);
-                } else {
-                    newUsers = new ArrayList<>();
-                }
-                newUsers.add(userID);
-                toMap.put(bookingID, newUsers);
+                fromMap.get(bookingID).remove(userID);
+                //fromMap.put(bookingID, users);
+                isRemoved = true;
             }
+        }
+        if(isRemoved){
+            // Add user to the new status
+            ArrayList<String> newUsers;
+            if (toMap.containsKey(bookingID)) {
+                newUsers = toMap.get(bookingID);
+            } else {
+                newUsers = new ArrayList<>();
+            }
+            newUsers.add(userID);
+            toMap.put(bookingID, newUsers);
         }
     }
 
@@ -76,10 +79,10 @@ public class BookingDataController {
         } else {
             // bookingID exists, add the userID to the existing list
             users.add(userID);
+            BookingData.usersBookedStatus.put(bookingID, users);
         }
     }
 
-    // array list have id 0, day1, date2, month3, time4, coach5, grade6, participants7,booked8, canceled9, attended10, rating11, review12
     public static void addBookedData(String BID, String Day, int Date, String Month, int Time, String Coach, int Grade, int Participants, int Booked, int Cancelled, int Attended, int Rating, String Review) {
         ArrayList<Object> data = new ArrayList<>();
         data.add(BID);

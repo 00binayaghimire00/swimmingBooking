@@ -1,8 +1,8 @@
-package Controller;
+package Model;
 
 import java.util.ArrayList;
 
-import static Data.StudentData.studentData;
+import static Model.LearnerData.LearnerData;
 
 public class StudentDataController {
     public static void createStudent(String uid, String name, int age, String phoneNumber, String gender, int grade, int booked, int cancelled, int attended) {
@@ -16,11 +16,11 @@ public class StudentDataController {
         student.add(booked);
         student.add(cancelled);
         student.add(attended);
-        studentData.add(student);
+        LearnerData.add(student);
     }
 
     public static void displayUsersList() {
-        for (Object lernersArray : studentData) {
+        for (Object lernersArray : LearnerData) {
             ArrayList<Object> studentInfo = (ArrayList<Object>) lernersArray;
             String name = (String) studentInfo.get(1);
             int age = (int) studentInfo.get(2);
@@ -28,4 +28,19 @@ public class StudentDataController {
             System.out.printf("Name: %-15s\tAge: %1d\t\tGrade: %1d\n", name, age, grade);
         }
     }
+
+    public static void addLernerStatusRecord(String BookingID, String Day, int Date, String Month, int Time , String Coach, int Grade, String UserID, String Status) {
+        ArrayList<Object> newLearnerStatusRecord = new ArrayList<>();
+        newLearnerStatusRecord.add(BookingID);
+        newLearnerStatusRecord.add(Day);
+        newLearnerStatusRecord.add(Date);
+        newLearnerStatusRecord.add(Month);
+        newLearnerStatusRecord.add(Time);
+        newLearnerStatusRecord.add(Coach);
+        newLearnerStatusRecord.add(Grade);
+        newLearnerStatusRecord.add(UserID);
+        newLearnerStatusRecord.add(Status);
+        Model.LearnerData.lernerStatusRecord.add(newLearnerStatusRecord);
+    }
+
 }
